@@ -79,16 +79,5 @@ public class Main {
            System.out.printf("Department: %s, Last Name: %s, First Name: %s%n", 
         		   department.getTitle(), e.getLastName(), e.getFirstName());
         }
-    }
-    
-    
-//    Создайте перечисление JobTitles названий должностей, предусмотреть следующие должности:  
-//    •	начальник подразделения (DepartmentBoss);
-//    •	инженер (Engineer);
-//    •	секретарь (Сlerk);
-//    •	директор (BigBoss);
-//    •	придумайте еще 2-3 должности. 
-    
-
-    
+    }    
 } 
