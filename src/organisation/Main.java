@@ -1,6 +1,6 @@
 package organisation;
 
-// Создайте отдельный класс для тестирования конструкторов и вызовов методов, созданных в соответствии с вариантом классов..
+// РЎРѕР·РґР°Р№С‚Рµ РѕС‚РґРµР»СЊРЅС‹Р№ РєР»Р°СЃСЃ РґР»СЏ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ РєРѕРЅСЃС‚СЂСѓРєС‚РѕСЂРѕРІ Рё РІС‹Р·РѕРІРѕРІ РјРµС‚РѕРґРѕРІ, СЃРѕР·РґР°РЅРЅС‹С… РІ СЃРѕРѕС‚РІРµС‚СЃС‚РІРёРё СЃ РІР°СЂРёР°РЅС‚РѕРј РєР»Р°СЃСЃРѕРІ..
 public class Main {
     public static void main(String[] args) {
 
@@ -23,8 +23,8 @@ public class Main {
     	Department itDepartment = new Department(employees);
     	itDepartment.setTitle("IT Department");
     	
-    	// используем константу FINANCIAL_DEPARTMENT_EMPLOYEES, содержащую массив сотрудников Employee
-    	// для создания финансового департамента financialDepartment
+    	// РёСЃРїРѕР»СЊР·СѓРµРј РєРѕРЅСЃС‚Р°РЅС‚Сѓ FINANCIAL_DEPARTMENT_EMPLOYEES, СЃРѕРґРµСЂР¶Р°С‰СѓСЋ РјР°СЃСЃРёРІ СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ Employee
+    	// РґР»СЏ СЃРѕР·РґР°РЅРёСЏ С„РёРЅР°РЅСЃРѕРІРѕРіРѕ РґРµРїР°СЂС‚Р°РјРµРЅС‚Р° financialDepartment
     	Department financialDepartment = new Department(FINANCIAL_DEPARTMENT_EMPLOYEES);
     	financialDepartment.setTitle("Financial Department");
     	
@@ -57,10 +57,10 @@ public class Main {
         printSortedEmployeesOfDepartment(financialDepartment);
     }
     
-    // напишем вспомогательную функцию, которая будет искать сотрудника в департаменте по имени и фамилии
-    // и выводить информацию о результатах поиска
-    // в качестве аргументов она принимает департамент, в котором будем искать, и имя и фамилию сотрудника,
-    // которого нужно найти/
+    // РЅР°РїРёС€РµРј РІСЃРїРѕРјРѕРіР°С‚РµР»СЊРЅСѓСЋ С„СѓРЅРєС†РёСЋ, РєРѕС‚РѕСЂР°СЏ Р±СѓРґРµС‚ РёСЃРєР°С‚СЊ СЃРѕС‚СЂСѓРґРЅРёРєР° РІ РґРµРїР°СЂС‚Р°РјРµРЅС‚Рµ РїРѕ РёРјРµРЅРё Рё С„Р°РјРёР»РёРё
+    // Рё РІС‹РІРѕРґРёС‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Р°С… РїРѕРёСЃРєР°
+    // РІ РєР°С‡РµСЃС‚РІРµ Р°СЂРіСѓРјРµРЅС‚РѕРІ РѕРЅР° РїСЂРёРЅРёРјР°РµС‚ РґРµРїР°СЂС‚Р°РјРµРЅС‚, РІ РєРѕС‚РѕСЂРѕРј Р±СѓРґРµРј РёСЃРєР°С‚СЊ, Рё РёРјСЏ Рё С„Р°РјРёР»РёСЋ СЃРѕС‚СЂСѓРґРЅРёРєР°,
+    // РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РЅР°Р№С‚Рё/
     public static Employee findEmployeeWithText(Department department, String firstName, String lastName) {
     	System.out.printf("Searching for employee %s %s in department [%s]...%n", firstName, lastName, department.getTitle());
     	Employee e = department.findEmployee(firstName, lastName);
@@ -72,7 +72,7 @@ public class Main {
   		return e;
     }
     
-    // создадим метод для вывода сотрудников департамента в отсортированном по фамилии и имени виде
+    // СЃРѕР·РґР°РґРёРј РјРµС‚РѕРґ РґР»СЏ РІС‹РІРѕРґР° СЃРѕС‚СЂСѓРґРЅРёРєРѕРІ РґРµРїР°СЂС‚Р°РјРµРЅС‚Р° РІ РѕС‚СЃРѕСЂС‚РёСЂРѕРІР°РЅРЅРѕРј РїРѕ С„Р°РјРёР»РёРё Рё РёРјРµРЅРё РІРёРґРµ
     public static void printSortedEmployeesOfDepartment(Department department) {
     	Employee[] sortedEmployees = department.getEmployeesSortedByLastName();
         for (Employee e: sortedEmployees) {
@@ -80,4 +80,15 @@ public class Main {
         		   department.getTitle(), e.getLastName(), e.getFirstName());
         }
     }
+    
+    
+//    РЎРѕР·РґР°Р№С‚Рµ РїРµСЂРµС‡РёСЃР»РµРЅРёРµ JobTitles РЅР°Р·РІР°РЅРёР№ РґРѕР»Р¶РЅРѕСЃС‚РµР№, РїСЂРµРґСѓСЃРјРѕС‚СЂРµС‚СЊ СЃР»РµРґСѓСЋС‰РёРµ РґРѕР»Р¶РЅРѕСЃС‚Рё:  
+//    вЂў	РЅР°С‡Р°Р»СЊРЅРёРє РїРѕРґСЂР°Р·РґРµР»РµРЅРёСЏ (DepartmentBoss);
+//    вЂў	РёРЅР¶РµРЅРµСЂ (Engineer);
+//    вЂў	СЃРµРєСЂРµС‚Р°СЂСЊ (РЎlerk);
+//    вЂў	РґРёСЂРµРєС‚РѕСЂ (BigBoss);
+//    вЂў	РїСЂРёРґСѓРјР°Р№С‚Рµ РµС‰Рµ 2-3 РґРѕР»Р¶РЅРѕСЃС‚Рё. 
+    
+
+    
 } 
