@@ -1,7 +1,6 @@
 package organisation;
 import java.util.Arrays;
-import java.util.Comparator;
-import java.lang.*; 
+import java.util.Comparator; 
 
 public class Department {
 	private String title;
@@ -103,8 +102,8 @@ public class Department {
 	class SortByLastNameFirstName implements Comparator<Employee> 
 	{ 
 	    // реализация compare-функции для сортитровки по возрастанию по комбинации Фамилия+Имя
-		// поскольку нам нужно для совпадающих фамилий сортировать с учетом имени, то мы сделаем сортировку не просто по фамилии,
-		// а по строке Фамилия.concat(Имя)
+		// поскольку нам нужно для совпадающих фамилий сортировать с учетом имени, то мы сделаем сортировку не просто 
+		// по фамилии, а по строке Фамилия.concat(Имя)
 	    public int compare(Employee e1, Employee e2) 
 	    { 
             final String field1 = e1.getLastName().concat(e1.getFirstName());

@@ -4,21 +4,23 @@ package organisation;
 public class Main {
     public static void main(String[] args) {
 
+    	// используем константу для объявления подразделения Financial Department, 
+    	// добавляем двух сотрудников   	
     	final Employee[] FINANCIAL_DEPARTMENT_EMPLOYEES = {
     		new Employee("Tatiana","Petrova","Junior Accountant", 300),
     		new Employee("Marfa","Vasilyeva","Chief Accountant", 3000),
     	};
     	
+    	// создадим двух сотрудников     	
     	Employee valik = new Employee("Valentyn","Cherevatiy","Junior Front-End Developer", 1000);
-    	
     	Employee kolya = new Employee("Nickolay", "Girits", "Senior Back-End Developer", 2000);
-//    	System.out.println(valik.getfirstName());
-//    	System.out.println(betterValik.getfirstName());
-    	
+    	System.out.println(valik.getFirstName());
+
+    	// создадим нового подразделения без сотрудников     	
     	Department dep = new Department("Lonely department without employees");
     	System.out.printf("Department: %s, Employees count: %s%n", dep.getTitle(), dep.getEmployeeCount());
-//    	System.out.println(dep.getEmployeeCount());
 
+    	// наймем сотрудников в IT подразделение
     	Employee[] employees = {valik, kolya};
     	Department itDepartment = new Department(employees);
     	itDepartment.setTitle("IT Department");
@@ -28,18 +30,19 @@ public class Main {
     	Department financialDepartment = new Department(FINANCIAL_DEPARTMENT_EMPLOYEES);
     	financialDepartment.setTitle("Financial Department");
     	
-//    	System.out.println(itDepartment.getEmployeeCount());
+    	// выведем количество сотрудников подразделения и их общую зарплату    	
     	System.out.printf("Department: %s, Employees count: %s, Total Salary: %s%n", 
     			itDepartment.getTitle(), itDepartment.getEmployeeCount(), itDepartment.getTotalSalary());
     	
-
-//    	Employee vasil = itDepartment.findEmployee("Vasiliy", "Ivanov");
-    	
+    	//  ищем сотрудника по имени и фамилии, выводим ссылку на экземпляр класса  	
     	Employee nick = findEmployeeWithText(itDepartment, "Nickolay", "Girits");
+    	// выводим данные сотрудника
     	System.out.printf("%s %s salary is %s%n", nick.getFirstName(), nick.getLastName(), nick.getSalary());
 
-    	// notfound will be null since we don't have Sergey Ivanov in IT department
+    	// notfound будет null если Сергея Иванова не окажется в IT department
     	Employee notfound = findEmployeeWithText(itDepartment, "Sergey", "Ivanov");
+    	
+    	// наймем сотрудника в подразделение     	
     	itDepartment.fireEmployee("Nickolay", "Girits", "Senior Back-End Developer");
     	Employee nick2 = findEmployeeWithText(itDepartment, "Nickolay", "Girits");
     	itDepartment.hireNewEmployee(nick);
@@ -52,7 +55,7 @@ public class Main {
     	itDepartment.hireNewEmployee(ruslan);
     	
     	System.out.println("---------------");
-        
+    	// проверка compare-функции для сортитровки по возрастанию по комбинации Фамилия+Имя
         printSortedEmployeesOfDepartment(itDepartment);
         printSortedEmployeesOfDepartment(financialDepartment);
     }
@@ -79,16 +82,5 @@ public class Main {
            System.out.printf("Department: %s, Last Name: %s, First Name: %s%n", 
         		   department.getTitle(), e.getLastName(), e.getFirstName());
         }
-    }
-    
-    
-//    Создайте перечисление JobTitles названий должностей, предусмотреть следующие должности:  
-//    •	начальник подразделения (DepartmentBoss);
-//    •	инженер (Engineer);
-//    •	секретарь (Сlerk);
-//    •	директор (BigBoss);
-//    •	придумайте еще 2-3 должности. 
-    
-
-    
+    }  
 } 
