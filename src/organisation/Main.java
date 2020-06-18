@@ -1,94 +1,72 @@
 package organisation;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
-// Создайте отдельный класс для тестирования конструкторов и вызовов методов, созданных в соответствии с вариантом классов..
 public class Main {
-    public static void main(String[] args) {
+	static SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+	
+	public static void main(String[] args) throws ParseException {
 
-    	final Employee[] FINANCIAL_DEPARTMENT_EMPLOYEES = {
-    		new Employee("Tatiana","Petrova","Junior Accountant", 300),
-    		new Employee("Marfa","Vasilyeva","Chief Accountant", 3000),
-    	};
-    	
-    	Employee valik = new Employee("Valentyn","Cherevatiy","Junior Front-End Developer", 1000);
-    	
-    	Employee kolya = new Employee("Nickolay", "Girits", "Senior Back-End Developer", 2000);
-//    	System.out.println(valik.getfirstName());
-//    	System.out.println(betterValik.getfirstName());
-    	
-    	Department dep = new Department("Lonely department without employees");
-    	System.out.printf("Department: %s, Employees count: %s%n", dep.getTitle(), dep.getEmployeeCount());
-//    	System.out.println(dep.getEmployeeCount());
+		// проверка Enum с помощью метода values(), позволяющего получить массив всех значений Enum
+        JobTitles[] titles = JobTitles.values();
+        for (JobTitles s : titles) { System.out.println(s); }
 
-    	Employee[] employees = {valik, kolya};
-    	Department itDepartment = new Department(employees);
-    	itDepartment.setTitle("IT Department");
-    	
-    	// используем константу FINANCIAL_DEPARTMENT_EMPLOYEES, содержащую массив сотрудников Employee
-    	// для создания финансового департамента financialDepartment
-    	Department financialDepartment = new Department(FINANCIAL_DEPARTMENT_EMPLOYEES);
-    	financialDepartment.setTitle("Financial Department");
-    	
-//    	System.out.println(itDepartment.getEmployeeCount());
-    	System.out.printf("Department: %s, Employees count: %s, Total Salary: %s%n", 
-    			itDepartment.getTitle(), itDepartment.getEmployeeCount(), itDepartment.getTotalSalary());
-    	
-
-//    	Employee vasil = itDepartment.findEmployee("Vasiliy", "Ivanov");
-    	
-    	Employee nick = findEmployeeWithText(itDepartment, "Nickolay", "Girits");
-    	System.out.printf("%s %s salary is %s%n", nick.getFirstName(), nick.getLastName(), nick.getSalary());
-
-    	// notfound will be null since we don't have Sergey Ivanov in IT department
-    	Employee notfound = findEmployeeWithText(itDepartment, "Sergey", "Ivanov");
-    	itDepartment.fireEmployee("Nickolay", "Girits", "Senior Back-End Developer");
-    	Employee nick2 = findEmployeeWithText(itDepartment, "Nickolay", "Girits");
-    	itDepartment.hireNewEmployee(nick);
-    	findEmployeeWithText(itDepartment, "Nickolay", "Girits");
-    	
-    	Employee andrey = new Employee("Andrey", "Girits", "Manual QA Engineer", 500);
-    	itDepartment.hireNewEmployee(andrey);
-    	
-    	Employee ruslan = new Employee("Ruslan","Avakumov","Business Analyst", 1200);
-    	itDepartment.hireNewEmployee(ruslan);
-    	
-    	System.out.println("---------------");
+        // создание департамента  
+        Department itDepartment = new Department("IT department");
+    
+        // создание сотрудника на полный день
+        FullDayEmployee e = new FullDayEmployee("Sergey", "Ivanov", JobTitles.ENGINEER, 1000, dateFormat.parse("20.06.2017"));
         
-        printSortedEmployeesOfDepartment(itDepartment);
-        printSortedEmployeesOfDepartment(financialDepartment);
-    }
-    
-    // напишем вспомогательную функцию, которая будет искать сотрудника в департаменте по имени и фамилии
-    // и выводить информацию о результатах поиска
-    // в качестве аргументов она принимает департамент, в котором будем искать, и имя и фамилию сотрудника,
-    // которого нужно найти/
-    public static Employee findEmployeeWithText(Department department, String firstName, String lastName) {
-    	System.out.printf("Searching for employee %s %s in department [%s]...%n", firstName, lastName, department.getTitle());
-    	Employee e = department.findEmployee(firstName, lastName);
-    	if (e != null) {
-    		System.out.printf("Employee %s %s found: %s%n", firstName, lastName, e);
-    	} else {
-    		System.out.printf("Employee %s %s not found in department [%s]%n", firstName, lastName, department.getTitle());
-    	}
-  		return e;
-    }
-    
-    // создадим метод для вывода сотрудников департамента в отсортированном по фамилии и имени виде
-    public static void printSortedEmployeesOfDepartment(Department department) {
-    	Employee[] sortedEmployees = department.getEmployeesSortedByLastName();
-        for (Employee e: sortedEmployees) {
-           System.out.printf("Department: %s, Last Name: %s, First Name: %s%n", 
-        		   department.getTitle(), e.getLastName(), e.getFirstName());
-        }
-    }
-    
-    
-//    Создайте перечисление JobTitles названий должностей, предусмотреть следующие должности:  
-//    •	начальник подразделения (DepartmentBoss);
-//    •	инженер (Engineer);
-//    •	секретарь (Сlerk);
-//    •	директор (BigBoss);
-//    •	придумайте еще 2-3 должности. 
-    
-
-    
-} 
+        // создание сотрудника на неполный день
+        HalfDayEmployee eHalfDay = new HalfDayEmployee("Vasiliy", "Petrov", JobTitles.TESTER, 500, dateFormat.parse("23.08.2018"));
+        
+        // проверка абстрактного public метода, возвращающего ежемесячную премию    
+        System.out.printf("%s %s monthly bonus: %s%n", e.getFirstName(), e.getLastName(), e.monthlyBonus());
+        
+        // создание двух коммандировок одного сотрудника для проверки нескольких методов
+        BusinessTravel bt = new BusinessTravel(dateFormat.parse("10.03.2019"), dateFormat.parse("20.04.2019"), 1000, 10);
+        BusinessTravel bt2 = new BusinessTravel(dateFormat.parse("01.05.2020"), dateFormat.parse("21.06.2020"), 1000, 10);
+        
+        // проверка метода durationInDays - длительность коммандировки и метода totalExpenses - общая стоимость коммандировки        
+        System.out.printf("Business travel [%s...%s] duration: %s, total expenses: %s%n", 
+        		dateFormat.format(bt.getDateOfLeave()), 
+        		dateFormat.format(bt.getDateOfReturn()), 
+        		bt.durationInDays(),
+        		bt.totalExpenses()
+        );
+        e.addBusinessTravel(bt);
+        e.addBusinessTravel(bt2);
+        
+        // наймем двух сотрудников - на полный день и на неполный       
+        itDepartment.hireNewEmployee(e);
+        itDepartment.hireNewEmployee(eHalfDay);
+        
+    	// проверка метода, возвращающего (ссылку на) экземпляр класса BusinessTravel по дате 
+    	// (если введенная дата попадает в интервал между началом и концом командировки); 
+        BusinessTravel foundBt = e.findBusinessTravelByDate(dateFormat.parse("12.03.2020"));
+        System.out.println(foundBt);
+        BusinessTravel notFoundBt = e.findBusinessTravelByDate(dateFormat.parse("09.03.2020"));
+        System.out.println(notFoundBt);
+        
+        // проверка метода, возвращающего среднюю продолжительность командировок работника 
+        System.out.printf("%s %s average travel duration: %s%n", e.getFirstName(), e.getLastName(), e.avgTravelDuration());
+        
+        // проверка метода, возвращающего средний интервал между командировками в днях 
+        System.out.printf("%s %s average duration between travels: %s%n", e.getFirstName(), e.getLastName(), e.avgDurationBetweenTravels());
+        e.removeBusinessTravel(dateFormat.parse("10.03.2020"));
+        
+        // проверка метод, возвращающего список (ArrayList<FullDayEmployee>) штатных сотрудников
+        System.out.println(itDepartment.getFullDayEmployees()); 
+        
+        // проверка метода, возвращающего список (ArrayList<HalfDayEmployee>) внешних совместителей
+        System.out.println(itDepartment.getHalfDayEmployees()); 
+        
+        // проверка метода, возвращающего список (ArrayList<BusinessTraveller>) сотрудников, находящихся в командировке в данное время
+        System.out.println(itDepartment.getCurrentBusinessTravelers());
+        
+    	// проверка метода, возвращающего список (ArrayList<BusinessTraveller>) сотрудников, 
+    	// находящихся в командировке указанного числа (принимается в качестве параметра метода).
+        System.out.println(itDepartment.getBusinessTravelersAtDate(dateFormat.parse("09.03.2020"))); 
+        System.out.println(itDepartment.getBusinessTravelersAtDate(dateFormat.parse("09.03.2010"))); 
+	}
+}

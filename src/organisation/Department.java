@@ -1,7 +1,10 @@
 package organisation;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Comparator;
-import java.lang.*; 
+import java.lang.*;
+import java.util.Date; 
 
 public class Department {
 	private String title;
@@ -122,5 +125,44 @@ public class Department {
 		Arrays.sort(sortedEmployees, new SortByLastNameFirstName());
 			
 		return sortedEmployees;
+	}
+	
+	//	добавьте метод, возвращающий список (ArrayList<FullDayEmployee>) штатных сотрудников;
+	public ArrayList<FullDayEmployee> getFullDayEmployees() {
+		ArrayList<FullDayEmployee> listOfFullDayEmployees = new ArrayList<FullDayEmployee>();
+		for (int i = 0; i < employees.length; ++i) {
+			if (employees[i] instanceof FullDayEmployee) { listOfFullDayEmployees.add( (FullDayEmployee) employees[i]); }
+		}
+		return listOfFullDayEmployees;
+	}
+
+	//	метод, возвращающий список (ArrayList<HalfDayEmployee>) внешних совместителей;
+	public ArrayList<HalfDayEmployee> getHalfDayEmployees() {
+		ArrayList<HalfDayEmployee> listOfHalfDayEmployees = new ArrayList<HalfDayEmployee>();
+		for (int i = 0; i < employees.length; ++i) {
+			if (employees[i] instanceof HalfDayEmployee) { listOfHalfDayEmployees.add((HalfDayEmployee) employees[i]); }
+		}
+		return listOfHalfDayEmployees;
+	}
+	
+	//	метод, возвращающий список (ArrayList<BusinessTraveller>) сотрудников, находящихся в командировке в данное время;
+	public ArrayList<BusinessTraveller> getCurrentBusinessTravelers() {
+		Date currentDate = new Date();  
+		return getBusinessTravelersAtDate(currentDate);
+	}
+	
+	// метод, возвращающий список (ArrayList<BusinessTraveller>) сотрудников, 
+	// находящихся в командировке указанного числа (принимается в качестве параметра метода).
+	public ArrayList<BusinessTraveller> getBusinessTravelersAtDate(Date date) {
+		ArrayList<BusinessTraveller> listOfBusinessTravelers= new ArrayList<BusinessTraveller>();
+		
+		for (int i = 0; i < employees.length; ++i) {
+			if (employees[i] instanceof FullDayEmployee) {
+				if (((FullDayEmployee) employees[i]).findBusinessTravelByDate(date) != null) {
+					listOfBusinessTravelers.add((BusinessTraveller) employees[i]); 
+				}
+			}
+		}
+		return listOfBusinessTravelers;
 	}
 }

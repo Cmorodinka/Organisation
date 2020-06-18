@@ -1,36 +1,47 @@
 package organisation;
+import java.util.Date;
 
-public class Employee {
-    private String jobTitle;
+//Класс Employee сделайте абстрактным. Добавьте следующие элементы:
+//Поле: дата приема на работу (экземпляр класса Date).
+ 
+public abstract class Employee {
+    private JobTitles jobTitle; // приватное поле, содержащее должность сотрудника, должно быть экземпляром перечисления JobTitles
     private Integer salary;
     private String firstName;
     private String lastName;
-    
-    // Конструкторы
-    
-    // конструктор может принимать имя, фамилию, должность, жалование.
-      public Employee(String firstName, String lastName, String job, Integer salary) {
+    private Date hiredDate; // дата приема на работу (экземпляр класса Date)
+  
+
+//    // Конструкторы
+//    
+// конструктор может принимать имя, фамилию, должность, жалование, дату приема
+// измените конструкторы и методы, работающие с названием должности, в соответствии с тем, что поле теперь имеет тип перечисления.
+      public Employee(String firstName, String lastName, JobTitles jobTitle, Integer salary, Date hiredDate) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.jobTitle = job;
+        this.jobTitle = jobTitle;
         this.salary = salary;
+        this.hiredDate = hiredDate;
       }
-           		
-    //  конструктор может принимать имя и фамилию (должность – инженер, жалование – 30к руб.);
-        Employee() {
-            jobTitle = "инженер";
-            salary = 300000;
-        } 
-        
-    // Методы
-      // создайте метод получения должности; .
-      public String getJobTitle() {
+      
+      //  конструктор может принимать имя и фамилию (должность – инженер, жалование – 30к руб.);
+      // измените конструкторы и методы, работающие с названием должности, в соответствии с тем, что поле теперь имеет тип перечисления.
+      Employee() {
+          setJobTitle(JobTitles.ENGINEER);
+          setSalary(300000);
+      }
+
+//     Методы
+      // создайте метод получения должности;
+      // измените конструкторы и методы, работающие с названием должности, в соответствии с тем, что поле теперь имеет тип перечисления.
+      public JobTitles getJobTitle() {
         return jobTitle;
       }
       
-      // создайте метод изменения должности; 
-      public void setJobTitle(String arg) {
-        jobTitle = arg;
+      // создайте метод изменения должности;
+      // измените конструкторы и методы, работающие с названием должности, в соответствии с тем, что поле теперь имеет тип перечисления.
+      public void setJobTitle(JobTitles jobTitle) {
+        this.jobTitle = jobTitle;
       }
 
       // создайте метод получения жалования; 
@@ -62,6 +73,20 @@ public class Employee {
       public void setLastName(String arg) {
         lastName = arg;
       }
-     
-}
+
+    // гетер и сеттер даты приема
+    // гетер даты приема
+	public Date getHiredDate() {
+		return hiredDate;
+	}
+
+	// сеттер даты приема
+	public void setHiredDate(Date hiredDate) {
+		this.hiredDate = hiredDate;
+	}
+	
+	// абстрактный public метод, возвращающий ежемесячную премию
+	abstract public float monthlyBonus();
+}    
+
 
