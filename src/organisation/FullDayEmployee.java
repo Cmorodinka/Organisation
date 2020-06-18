@@ -39,10 +39,7 @@ public class FullDayEmployee extends Employee implements BusinessTraveller {
 		LocalDate endDate = calendar.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); // текущая дата
 		Period period = Period.between(startDate, endDate); // интервал между текущей датой и датой приема на работу
 		float fullYearsInCompany = period.getYears(); // число полных лет, которые проработал сотрудник в компании
-//		System.out.println(startDate);
-//		System.out.println(endDate);
-//		System.out.println(period.getYears());
-		
+
 		
 		// бонус вычисляется как число полных лет, которые проработал сотрудник в компании, деленное на 20.
 		bonus = fullYearsInCompany / 20;

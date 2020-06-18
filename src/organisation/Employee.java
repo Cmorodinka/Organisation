@@ -74,8 +74,8 @@ public abstract class Employee {
         lastName = arg;
       }
 
-    // гетер и сеттер даты приема
-    // гетер даты приема
+    // геттер и сеттер даты приема
+    // геттер даты приема
 	public Date getHiredDate() {
 		return hiredDate;
 	}
